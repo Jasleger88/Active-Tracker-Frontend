@@ -7,6 +7,8 @@ function Navbar() {
     <Link to="/auth/signup" className="button is-danger is-rounded">Signup</Link>
     <Link to="/auth/login" className="button is-primary is-rounded">Login</Link>
     <Link to="/auth/exercise" className="button is-link is-rounded">Add Exercise</Link>
+    <Link to ="/auth/categories" className="navbar-item">Categories</Link>
+    <Link to ="/auth/log" className="navbar-item">Log Your Workout</Link>
    
     </>
 }
