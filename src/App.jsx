@@ -5,6 +5,7 @@ import Signup from "./components/Signup";
 import Login from "./components/Login";
 import { ToastContainer } from 'react-toastify';
 import Navbar from "./components/Navbar";
+import ExerciseForm from "./components/ExerciseForm";
 
 function App() {
   return <>
@@ -17,6 +18,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="auth/signup" element={<Signup />} />
       <Route path="auth/login" element={<Login />} />
+      <Route path="/auth/exercise" element={<ExerciseForm/>} />
     </Routes>
   </Router>
   

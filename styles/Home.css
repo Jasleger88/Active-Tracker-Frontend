@@ -1,0 +1,57 @@
+
+body.home-page, html.home-page {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #ff6b6b, #ff6b89);
+}
+  
+  body.home-page .hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 3.25rem);
+    background: none; 
+    color: #b72c2c;
+  }
+  
+  body.home-page .hero-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  body.home-page .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  body.home-page .has-text-centered {
+    text-align: center;
+  }
+  
+  body.home-page .has-text-weight-bold {
+    font-weight: bold;
+  }
+  
+  body.home-page .text-section {
+    padding: 50px 0;
+    background: #ffffff;
+    color: #333333;
+  }
+  
+  body.home-page .subtitle {
+    font-size: 1.5rem;
+    animation: fadeIn 3s ease-out forwards;
+    opacity: 0;
+  }
+  
+  body.home-page .mb-5 {
+    margin-bottom: 3rem;
+  }
+  
+ 
+  
+ 
+  
