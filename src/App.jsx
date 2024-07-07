@@ -6,8 +6,8 @@ import Signup from './components/Signup';
 import Login from './components/Login';
 import Navbar from './components/Navbar';
 import ExerciseList from './components/ExerciseList';
-import ExerciseManager from './components/ExerciseManager';
-// import CategoryPage from './components/CategoryPage';
+// import ExerciseManager from './components/ExerciseManager';
+import CategoryPage from './components/CategoryPage';
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
         <Route path="/auth/signup" element={<Signup />} />
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/exercise" element={<ExerciseList />} />
-        <Route path="/exercise-manager" element={<ExerciseManager />} />
+        {/* <Route path="/exercise-manager" element={<ExerciseManager />} /> */}
         <Route path="/category-page" element={<CategoryPage />} />
       </Routes>
     </Router>

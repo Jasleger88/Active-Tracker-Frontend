@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import CategoryPage from './CategoryPage';
 
 
-const ExerciseList = ({ fetchingAllExercises }) => {
+const ExerciseList = ({ fetchingExercises }) => {
     const [exercises, setExercises] = useState([]);
     const [filter, setFilter] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetchingAllExercises();
+        fetchExercises();
     }, []);
 
-    const fetchingAllExercises = async () => {
+    const fetchExercises = async () => {
         setLoading(true);
         try {
             const response = await axios.get('/api/exercise');
@@ -35,18 +36,19 @@ const ExerciseList = ({ fetchingAllExercises }) => {
 
     return (
         <div>
-            <label>Filter Exercises: </label>
-            <select onChange={(e) => setFilter(e.target.value)}>
-                <option value="">All</option>
-                {[...'A-Z'].map(letter => (
-                    <option key={letter} value={letter}>{letter}</option>
-                ))}
-            </select>
-            <ul>
+            <CategoryPage/>
+            
+
+
+
+
+
+
+            {/* <ul>
                 {exercises.filter(exercise => !filter || exercise.name.startsWith(filter)).map(exercise => (
                     <li key={exercise.id}>{exercise.name} - {exercise.description}</li>
                 ))}
-            </ul>
+            </ul> */}
         </div>
     );
 };

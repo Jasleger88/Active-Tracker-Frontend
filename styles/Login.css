@@ -1,4 +1,4 @@
-
+/* 
 #login-section {
     height: 100vh;
     display: flex;
@@ -51,13 +51,13 @@
 
 #login-username-field, #login-password-field {
     margin-bottom: 20px;
-}
+} */
 
-#login-username-label, #login-password-label {
+/* #login-username-label, #login-password-label {
     font-weight: bold;
-}
+} */
 
-#login-username-input, #login-password-input {
+/* #login-username-input, #login-password-input {
     width: 100%;
     box-sizing: border-box;
 }
@@ -78,4 +78,4 @@
 
 #login-submit-button:hover {
     background-color: #5c7cfc; 
-}
+} */
