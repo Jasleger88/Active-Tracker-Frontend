@@ -3,6 +3,8 @@ import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify'
+import '../../styles/Signup.css'
+
 
 
 

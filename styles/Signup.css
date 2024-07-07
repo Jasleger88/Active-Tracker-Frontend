@@ -1,9 +1,10 @@
-/* #signup-section {
+ #signup-section {
     
     padding: 50px 0;
     background-size: cover;
     background-repeat: no-repeat;
     box-shadow: inset 0px 5px 10px rgba(0, 0, 0, 0.9);
+    background-image: url('https://images.unsplash.com/photo-1627483298235-f3bac2567c1c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fHw%3D');
 }
 
 #signup-container {
@@ -74,4 +75,4 @@
 
 #submit-button:hover {
     background-color: #5c7cfc; 
-} */
+} 
