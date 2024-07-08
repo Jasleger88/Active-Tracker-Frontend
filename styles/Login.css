@@ -43,7 +43,7 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f0f0f0;
-    color: pink;
+    color: rgb(220, 104, 15);
 }
 
 .login-button:hover {

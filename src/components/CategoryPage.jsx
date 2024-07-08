@@ -26,7 +26,7 @@ const CategoryPage = ({ categoryId, categoryName }) => {
     "Core",
   ];
 
-  // update my pictures later
+  // update my pictures for Arms
   const categoryImages = {
     Chest:"https://i.pinimg.com/originals/d2/56/c7/d256c714b49a9a1de0084ba395f8719f.jpg",
     Back:"https://i.pinimg.com/736x/aa/54/d7/aa54d7fea6ac490b5cb6368d1ee09929.jpg",
@@ -125,7 +125,7 @@ const CategoryPage = ({ categoryId, categoryName }) => {
                   </div>
                 </div>
                 <button className="button" type="submit">
-                  Log Exercise
+                  Add to Log
                 </button>
               </form>
             </div>

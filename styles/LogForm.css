@@ -1,0 +1,12 @@
+.log-form {
+    background-image: url('https://i.imgur.com/iQZDFUj.png');
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .log-details {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
