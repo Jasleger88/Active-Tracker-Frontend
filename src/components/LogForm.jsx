@@ -47,7 +47,7 @@ const LogForm = ({ fetchLogs }) => {
 
   return (
     <div className="columns">
-      <div className="column is-6">
+      <div className="column is-6" style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '10px' }}>
         <h2 className="title is-4">Log Form</h2>
         <form onSubmit={handleSubmit}>
           <div className="field">
@@ -121,14 +121,6 @@ const LogForm = ({ fetchLogs }) => {
                 Clear Form
               </button>
             </div>
-            <div className="control">
-            <button
-                className="button is-danger is-dark"
-                onClick={() => handleDeleteExercise(index)}
-              >
-               Edit
-              </button>
-              </div>
           </div>
         </form>
       </div>
@@ -151,11 +143,10 @@ const LogForm = ({ fetchLogs }) => {
             </li>
           ))}
         </ul>
-        < img src= "https://i.imgur.com/iQZDFUj.png" alt="Picture of working" style= {{maxWidth: '100', marginTop: '10px'}} />
+        <img src="https://i.imgur.com/iQZDFUj.png" alt="Picture of working" style={{ maxWidth: '100%', marginTop: '10px' }} />
       </div>
     </div>
   );
 };
 
 export default LogForm;
-

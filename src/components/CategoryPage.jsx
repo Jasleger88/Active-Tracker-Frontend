@@ -41,12 +41,12 @@ const CategoryPage = ({ categoryId, categoryName }) => {
     try {
       const token = localStorage.getItem("token");
 
-      const { data } = await axios.post(`http://localhost:8000/api/exercise/`, formData, {
+      const { data } = await axios.post(`http://localhost:5173/auth/logForm`, formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
       toast.success("Exercise created successfully!");
-      navigate("/log");
+      navigate("/logForm", { state: { exerciseName: formData.name } }); 
     } catch (err) {
       toast.error("Sorry, we have encountered an error!");
     }

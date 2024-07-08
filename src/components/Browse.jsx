@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import { Link } from 'react-router-dom'
+// import '../../styles/Browse.css';
 
 export default function Browse() {
-  const [cats, setCats] = useState([]);
-  const [catFilter, setCatFilter] = useState('');
-  const [selectedExercise, setSelectedExercise] = useState('');
+  const [exercises, setExercises] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('');
 
   const formCategory = [
     "Chest",
@@ -18,60 +17,38 @@ export default function Browse() {
   ];
 
   useEffect(() => {
-    async function fetchCats() {
+    async function fetchExercises() {
       try {
-        const resp = await axios.get(`http://localhost:8000/api/auth/l/`);
-        const data = await resp.data;
-        setCats(data);
+        const response = await axios.get(`http://localhost:8000/api/exercise/`);
+        setExercises(response.data);
       } catch (error) {
-        console.error('Error fetching categories:', error);
-        toast.error('Failed to fetch categories');
+        console.error('Error fetching exercises:', error);
       }
     }
-    fetchCats();
+
+    fetchExercises();
   }, []);
 
-  function filterCats() {
-    const filteredCats = cats.filter(cat => {
-      const category = cat.name.toLowerCase();
-      const filterText = catFilter.toLowerCase();
-      return category.includes(filterText)
-        && (selectedExercise === '' || cat.name === selectedExercise);
-    });
-    return filteredCats;
+  function filterExercises() {
+    return exercises.filter(exercise => 
+      selectedCategory === '' || exercise.category === selectedCategory
+    ).sort((a, b) => a.name.localeCompare(b.name));
   }
 
   function handleReset() {
-    setCatFilter('');
-    setSelectedExercise('');
-  }
-
-  async function handleAddToWishlist(cat) {
-    try {
-      console.log(cat);
-      const token = localStorage.getItem("token");
-
-      const { data } = await axios.post(`/api/LogForm`, { cat }, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      toast.success("Added To Log!");
-    } catch {
-      toast.error("Category Not Added");
-    }
+    setSelectedCategory('');
   }
 
   return (
     <>
       <div className="section">
         <div className="container">
-          <h1 className="title">Select Exercises To Add to Your Log</h1>
+          <h1 className="title">Browse Exercises</h1>
           <div className="controls">
             <select
               className="input"
-              placeholder="Select Category.."
-              onChange={(event) => setSelectedExercise(event.target.value)}
-              value={selectedExercise}
+              onChange={(event) => setSelectedCategory(event.target.value)}
+              value={selectedCategory}
             >
               <option value="">Select Category</option>
               {formCategory.map((category) => (
@@ -83,24 +60,18 @@ export default function Browse() {
             <button className="button is-danger" onClick={handleReset}>Reset</button>
           </div>
           <div className="browse-columns columns is-multiline is-mobile">
-            {filterCats().map((cat, index) => (
-              <div
-                onClick={() => handleAddToWishlist(cat)}
-                className="browse-column column is-one-third-desktop is-half-tablet is-half-mobile"
-                key={index}
-              >
+            {filterExercises().map((exercise, index) => (
+              <div className="browse-column column is-one-third-desktop is-half-tablet is-half-mobile" key={index}>
                 <div className="card">
                   <div className="card-content">
                     <div className="card-image">
-                      <div className="container t-shirt-container" id={cat.name}>
-                        <div className="container image-overlay-container">
-                          <img src={cat.imageUrl} alt={`picture of ${cat.name}`} />
-                        </div>
-                      </div>
+                      <figure className="image is-4by3">
+                        <img src={exercise.image} alt={`Image of ${exercise.name}`} />
+                      </figure>
                     </div>
-                    <div className="card-content">
-                      <p><strong>Category:</strong> {cat.name}</p>
-                      <p><strong>Description:</strong> {cat.description}</p>
+                    <div className="content">
+                      <p className="title is-5">{exercise.name}</p>
+                      <p>{exercise.description}</p>
                     </div>
                   </div>
                 </div>

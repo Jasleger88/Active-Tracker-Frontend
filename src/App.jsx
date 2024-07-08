@@ -22,6 +22,8 @@ function App() {
         <Route path="/category-page" element={<CategoryPage />} />
         <Route path="/auth/logForm" element={<LogForm />} />
         <Route path="/auth/browse" element={<Browse />} />
+        <Route path="/logform/:id" element={<LogForm />} />
+
       </Routes>
     </Router>
   );
