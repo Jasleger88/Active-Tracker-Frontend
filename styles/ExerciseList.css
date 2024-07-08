@@ -1,0 +1,9 @@
+.exerciseList {
+    background-image: url('https://media.istockphoto.com/id/1039482170/vector/standing-man-wireframe-human-body-vector-outline-illustration.jpg?s=612x612&w=0&k=20&c=hkcKyQX4NO7S8eWZFcP_lXEHfd5h4pnDCGZ4eRMgudQ=');
+    background-size: cover; 
+    background-position: center; 
+    padding: 10px;
+    height: 100vh;
+    opacity: 0.8;
+  }
+  

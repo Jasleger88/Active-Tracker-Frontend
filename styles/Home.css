@@ -29,11 +29,11 @@ h2 {
   font-weight: bold;
   margin-top: 10px;
 }
-/* Home.css */
+
 
 .image-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Two columns with equal width */
+  grid-template-columns: 1fr 1fr;
   gap: 50px; 
 }
 

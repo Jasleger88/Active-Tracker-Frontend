@@ -26,7 +26,7 @@ const CategoryPage = ({ categoryId, categoryName }) => {
     "Core",
   ];
 
-  //  URLs for muscle group images based on categories....update my pictures later
+  // update my pictures later
   const categoryImages = {
     Chest:"https://media.istockphoto.com/id/1309275239/photo/labeled-male-hamstring-muscle-group-on-skeleton.webp?b=1&s=170667a&w=0&k=20&c=BXSvX5o0GZyOteIkZjEsTPfTLkMWnibJRh4JtIYODRQ=",
     Back:"https://media.istockphoto.com/id/1309275239/photo/labeled-male-hamstring-muscle-group-on-skeleton.webp?b=1&s=170667a&w=0&k=20&c=BXSvX5o0GZyOteIkZjEsTPfTLkMWnibJRh4JtIYODRQ=",

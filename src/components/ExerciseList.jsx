@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import CategoryPage from './CategoryPage';
+import '../../styles/ExerciseList.css';
 
 
 const ExerciseList = ({ fetchingExercises }) => {
@@ -35,7 +36,7 @@ const ExerciseList = ({ fetchingExercises }) => {
     }
 
     return (
-        <div>
+        <div className='exerciseList'>
             <CategoryPage/>
             
 

@@ -10,14 +10,14 @@
     display: block;
     width: 100%;
     height: auto;
-    border: 5px solid #cda22a; /* Border color and thickness */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow with opacity */
-    transition: transform 0.3s ease-in-out; /* Optional: Add a smooth transition */
+    border: 5px solid #cda22a; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    transition: transform 0.3s ease-in-out; 
   }
   
   .muscle-group-image:hover {
-    transform: scale(1.20); /* Optional: Scale up slightly on hover */
+    transform: scale(1.20); 
   }
-  
+
 
 
