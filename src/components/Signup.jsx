@@ -32,7 +32,7 @@ export default function Signup() {
             console.log(formData)
             await axios.post(`http://localhost:8000/api/auth/register/`, formData);
             toast.success('Registration successful');
-            navigate('auth/register');
+            navigate('/');
             
         } catch (err) {
             toast.error('Registration failed, use special character');

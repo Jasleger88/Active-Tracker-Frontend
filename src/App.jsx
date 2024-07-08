@@ -8,6 +8,7 @@ import Navbar from './components/Navbar';
 import ExerciseList from './components/ExerciseList';
 import CategoryPage from './components/CategoryPage';
 import LogForm from './components/LogForm';
+import Browse from './components/Browse';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/auth/exercise" element={<ExerciseList />} />
         <Route path="/category-page" element={<CategoryPage />} />
         <Route path="/auth/logForm" element={<LogForm />} />
+        <Route path="/auth/browse" element={<Browse />} />
       </Routes>
     </Router>
   );

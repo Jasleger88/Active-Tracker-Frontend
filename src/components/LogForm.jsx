@@ -132,7 +132,7 @@ const LogForm = ({ fetchLogs }) => {
           </div>
         </form>
       </div>
-      <div className="column is-6" style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '8px' }}>
+      <div className="column is-6" style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '10px' }}>
         <h2 className="title is-4">Log Details</h2>
         <p><strong>Date:</strong> {date}</p>
         <p><strong>Duration:</strong> {duration} minutes</p>
@@ -151,6 +151,7 @@ const LogForm = ({ fetchLogs }) => {
             </li>
           ))}
         </ul>
+        < img src= "https://i.imgur.com/iQZDFUj.png" alt="Picture of working" style= {{maxWidth: '100', marginTop: '10px'}} />
       </div>
     </div>
   );

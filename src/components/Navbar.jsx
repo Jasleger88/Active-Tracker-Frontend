@@ -11,6 +11,7 @@ function Navbar() {
     <Link to="/auth/login" className="button is-warning">Login</Link>
     <Link to="/auth/exercise" className="button is-warning">Create Workout</Link>
     <Link to="/auth/logForm" className="button is-warning">Your Personalize Log</Link>
+    <Link to="/auth/browse" className="button is-warning">Choose Exercise</Link>
 
     </div>
     </>
