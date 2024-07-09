@@ -5,8 +5,10 @@ import axios from 'axios';
 
 export default function Browse() {
   const [exercises, setExercises] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
 
+  // Categories that users can select from dropdown menu. This stays the same.
   const formCategory = [
     "Chest",
     "Back",
@@ -16,37 +18,57 @@ export default function Browse() {
     "Core",
   ];
 
+  // Fetch exercises and categories from the API and update the state.
   useEffect(() => {
-    async function fetchExercises() {
+    async function fetchData() {
       try {
-        const response = await axios.get(`http://localhost:8000/api/exercise/`);
-        setExercises(response.data);
+        const exerciseResponse = await axios.get(`http://localhost:8000/api/exercise/`);
+        setExercises(exerciseResponse.data);
+
+        const categoryResponse = await axios.get(`http://localhost:8000/api/category/`);
+        setCategories(categoryResponse.data);
       } catch (error) {
-        console.error('Error fetching exercises:', error);
+        console.error('Error fetching data:', error);
       }
     }
 
-    fetchExercises();
+    fetchData();
   }, []);
- 
-  function filterExercises() {
-    const filterText = selectedCategory.toLowerCase();
-  
-    const filteredExercises = exercises.filter(exercise => {
-      const category = typeof exercise.category === 'string' ? exercise.category.toLowerCase() : '';
-      return category.includes(filterText) && (selectedCategory === '' || exercise.category === selectedCategory);
-    });
-  
-    return filteredExercises.sort((a, b) => a.name.localeCompare(b.name));
+
+  // Map category names to IDs
+  //cat.name  is the name property of cat within the form category.
+  //cat.name accesses the name property of the current category object in the itertion 
+  function getCategoryID(categoryName) {
+    const category = categories.find(cat => cat.name.toLowerCase() === categoryName.toLowerCase());
+    return category ? category.id : null;
   }
-  
+
+  // Filter exercises based on the selected category.
+  function filterExercises() {
+    const selectedCategoryID = getCategoryID(selectedCategory);
+    console.log("Selected Category:", selectedCategory);
+    const filteredExercises = exercises.filter(exercise => {
+      console.log("Exercise Category:", exercise.category);
+      return (
+        selectedCategory === '' || exercise.category === selectedCategoryID
+      );
+    });
+    console.log("Filtered Exercises:", filteredExercises);
+    return filteredExercises;
+  }
+
+  // Reset the selected category if the user wants to select exercises from a different category.
   function handleReset() {
     setSelectedCategory('');
   }
 
+  // Add an exercise to the log by exercise ID.
   async function handleAddToLog(exerciseId) {
     try {
-      await axios.post('http://localhost:8000/api/log/', { exercise: exerciseId });
+      const token = localStorage.getItem('token');
+      await axios.post('http://localhost:8000/api/log/', { exercise: exerciseId }, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       toast.success('Exercise added to log!');
     } catch (error) {
       console.error('Error adding exercise to log:', error);
@@ -54,6 +76,7 @@ export default function Browse() {
     }
   }
 
+  // Render the component.
   return (
     <>
       <div className="section">
@@ -62,7 +85,7 @@ export default function Browse() {
           <div className="controls">
             <select
               className="input"
-              placeholder ="Select Category..."
+              placeholder="Select Category..."
               onChange={(event) => setSelectedCategory(event.target.value)}
               value={selectedCategory}
             >
@@ -77,18 +100,22 @@ export default function Browse() {
           </div>
           <div className="browse-columns columns is-multiline is-mobile">
             {filterExercises().map((exercise, index) => (
-              <div className="browse-column column is-one-third-desktop is-half-tablet is-half-mobile" key={index}>
+              <div
+                onClick={() => handleAddToLog(exercise.id)}
+                className="browse-column column is-one-third-desktop is-half-tablet is-half-mobile"
+                key={index}
+              >
                 <div className="card">
                   <div className="card-content">
-                    {/* <div className="card-image">
-                      <figure className="image is-4by3">
-                        <img src={exercise.image} alt={`Image of ${exercise.name}`} />
-                      </figure>
-                    </div> */}
                     <div className="content">
                       <p className="title is-5">{exercise.name}</p>
                       <p>{exercise.description}</p>
-                      <button className="button is-primary" onClick={() => handleAddToLog(exercise.id)}>Add to Log</button>
+                      <button
+                        className="button is-primary"
+                        onClick={() => handleAddToLog(exercise.id)}
+                      >
+                        Add to Log
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -100,3 +127,5 @@ export default function Browse() {
     </>
   );
 }
+
+

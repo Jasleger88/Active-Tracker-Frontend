@@ -2,13 +2,20 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import '../../styles/LogForm.css';
+import { useNavigate} from 'react-router-dom';
 
-const LogForm = ({ fetchLogs }) => {
+
+
+const LogForm = () => {
+  const navigate = useNavigate();
   const [date, setDate] = useState('');
   const [duration, setDuration] = useState('');
   const [notes, setNotes] = useState('');
   const [exercise, setExercise] = useState('');
   const [exercises, setExercises] = useState([]);
+
+//adds current exercise to the exercises array if it is filled
+//resets the exercise input field afterward
 
   const handleAddExercise = () => {
     if (exercise.trim()) {
@@ -16,35 +23,41 @@ const LogForm = ({ fetchLogs }) => {
       setExercise('');
     }
   };
-
+//removes the exercise from the array if user does not want to add it to log
   const handleDeleteExercise = (index) => {
     const updatedExercises = [...exercises];
     updatedExercises.splice(index, 1);
     setExercises(updatedExercises);
   };
-
+// clear the entire form based on my log details below
   const handleClearForm = () => {
     setDate('');
     setDuration('');
     setNotes('');
     setExercise('');
   };
-
+//created a log object with the form data
+//sending post request to the apt to add to the log
   const handleSubmit = async (e) => {
     e.preventDefault();
     const logData = { date, duration, notes, exercises };
 
     try {
-      await axios.post('/api/log/', logData);
-      fetchLogs();
-      handleClearForm(); 
+      const token = localStorage.getItem('token')
+      const { data } = await axios.get(`http://localhost:8000/api/log/`, {
+          headers: { Authorization: `Bearer ${token}` }
+      })
+      navigate('/saveLog') 
       toast.success('Log added successfully');
     } catch (err) {
       console.error('Error adding log:', err);
       toast.error('Failed to add log');
     }
   };
-
+// form to log workout details
+//workout date, workout minutes, additional notes, and exercises input is inserted.
+//input allows my user to add exercies when the button is clicked
+// handlesubmit/clear form button functions added for user experience on the form . 
   return (
     <div className="columns">
       <div className="column is-6" style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '10px' }}>

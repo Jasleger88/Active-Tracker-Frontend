@@ -10,7 +10,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
@@ -24,7 +24,7 @@ export default function Login() {
     e.preventDefault();
     try {
       const { data } = await axios.post(`http://localhost:8000/api/auth/login/`, formData);
-      toast.success(`Welcome, ${formData.username}`);
+      toast.success(`Welcome, ${formData.email}`);
       const token = data.token;
 
       localStorage.setItem('token', token);
@@ -38,16 +38,16 @@ export default function Login() {
     <div className="login-section section" id="login-section">
       <div className="login-container container" id="login-container">
         <form onSubmit={handleSubmit} className="login-form" id="login-form">
-          <div className="login-field field" id="login-username-field">
-            <label className="login-label label" htmlFor="username" id="login-username-label">Username</label>
-            <div className="login-control control" id="login-username-control">
+          <div className="login-field field" id="login-email-field">
+            <label className="login-label label" htmlFor="email" id="login-email-label">Email</label>
+            <div className="login-control control" id="login-email-control">
               <input
                 className="login-input input"
                 type="text"
-                name="username"
-                id="login-username-input"
+                name="email"
+                id="login-email-input"
                 onChange={handleChange}
-                value={formData.username}
+                value={formData.email}
               />
             </div>
           </div>

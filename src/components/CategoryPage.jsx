@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
-import '../../styles/CategoryPage.css'
+import SaveLog from './SaveLog'; 
 
 const CategoryPage = ({ categoryId, categoryName }) => {
   const navigate = useNavigate();
@@ -13,6 +13,8 @@ const CategoryPage = ({ categoryId, categoryName }) => {
     description: "",
   });
 
+  // category (dropdown menu of categories in an array)
+
   const formCategory = [
     "Chest",
     "Back",
@@ -21,7 +23,7 @@ const CategoryPage = ({ categoryId, categoryName }) => {
     "Legs",
     "Core",
   ];
-
+//images assocaited with each respective category
   const categoryImages = {
     Chest: "https://i.pinimg.com/originals/d2/56/c7/d256c714b49a9a1de0084ba395f8719f.jpg",
     Back: "https://i.pinimg.com/736x/aa/54/d7/aa54d7fea6ac490b5cb6368d1ee09929.jpg",
@@ -30,6 +32,11 @@ const CategoryPage = ({ categoryId, categoryName }) => {
     Arms: "https://media.istockphoto.com/id/1309275239/photo/labeled-male-hamstring-muscle-group-on-skeleton.webp?b=1&s=170667a&w=0&k=20&c=BXSvX5o0GZyOteIkZjEsTPfTLkMWnibJRh4JtIYODRQ=",
     Core: 'https://i.pinimg.com/736x/d9/d3/be/d9d3be914562e19f479f413dcf3c74f5.jpg'
   };
+
+//helps to create a new exercise 
+// prevents default behavior
+//resets the form to empty
+//redirects my user to savelog (may need to change this not sure yet.)
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -45,11 +52,24 @@ const CategoryPage = ({ categoryId, categoryName }) => {
         name: "",
         description: ""
       });
+
+
+      const exerciseData = {
+        category: data.category,
+        name: data.name,
+        description: data.description,
+      };
+
+      // Navigate to SaveLog I need correct path
+      navigate('/saveLog')
     } catch (err) {
       console.log(err.response.data);
       toast.error("Sorry, we have encountered an error!");
     }
   }
+
+  //updates the form when this function is called
+  // this copies the formData and updates the filed to the changed input
 
   function handleChange(e) {
     const newFormData = { ...formData };
@@ -57,6 +77,9 @@ const CategoryPage = ({ categoryId, categoryName }) => {
     setFormData(newFormData);
   }
 
+
+  //when a category is selected, the correct image will show up. 
+  //
   function displayMuscleGroupImage(category) {
     if (category && categoryImages.hasOwnProperty(category)) {
       return (
@@ -65,7 +88,10 @@ const CategoryPage = ({ categoryId, categoryName }) => {
     }
     return null;
   }
-
+//my layout divides into two columns
+// the selected image shows up with the category
+// input name (name, exercise, and description)
+// submit button (it will be triggered upon my user clicking submit. The function handleSubmit will happen)
   return (
     <div className="section">
       <div className="columns">
