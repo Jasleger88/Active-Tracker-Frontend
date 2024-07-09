@@ -23,7 +23,6 @@ function App() {
         <Route path="/auth/logForm" element={<LogForm />} />
         <Route path="/auth/browse" element={<Browse />} />
         <Route path="/logform/:id" element={<LogForm />} />
-
       </Routes>
     </Router>
   );

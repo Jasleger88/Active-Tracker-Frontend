@@ -28,15 +28,30 @@ export default function Browse() {
 
     fetchExercises();
   }, []);
-
+ 
   function filterExercises() {
-    return exercises.filter(exercise => 
-      selectedCategory === '' || exercise.category === selectedCategory
-    ).sort((a, b) => a.name.localeCompare(b.name));
+    const filterText = selectedCategory.toLowerCase();
+  
+    const filteredExercises = exercises.filter(exercise => {
+      const category = typeof exercise.category === 'string' ? exercise.category.toLowerCase() : '';
+      return category.includes(filterText) && (selectedCategory === '' || exercise.category === selectedCategory);
+    });
+  
+    return filteredExercises.sort((a, b) => a.name.localeCompare(b.name));
   }
-
+  
   function handleReset() {
     setSelectedCategory('');
+  }
+
+  async function handleAddToLog(exerciseId) {
+    try {
+      await axios.post('http://localhost:8000/api/log/', { exercise: exerciseId });
+      toast.success('Exercise added to log!');
+    } catch (error) {
+      console.error('Error adding exercise to log:', error);
+      toast.error('Failed to add exercise to log.');
+    }
   }
 
   return (
@@ -47,6 +62,7 @@ export default function Browse() {
           <div className="controls">
             <select
               className="input"
+              placeholder ="Select Category..."
               onChange={(event) => setSelectedCategory(event.target.value)}
               value={selectedCategory}
             >
@@ -64,14 +80,15 @@ export default function Browse() {
               <div className="browse-column column is-one-third-desktop is-half-tablet is-half-mobile" key={index}>
                 <div className="card">
                   <div className="card-content">
-                    <div className="card-image">
+                    {/* <div className="card-image">
                       <figure className="image is-4by3">
                         <img src={exercise.image} alt={`Image of ${exercise.name}`} />
                       </figure>
-                    </div>
+                    </div> */}
                     <div className="content">
                       <p className="title is-5">{exercise.name}</p>
                       <p>{exercise.description}</p>
+                      <button className="button is-primary" onClick={() => handleAddToLog(exercise.id)}>Add to Log</button>
                     </div>
                   </div>
                 </div>

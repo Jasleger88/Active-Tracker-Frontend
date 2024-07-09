@@ -4,17 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import '../../styles/CategoryPage.css'
 
-
-
-
 const CategoryPage = ({ categoryId, categoryName }) => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     category: "",
-    name: "Name of Exercise",
-    description: "Add Description Here",
-
+    name: "",
+    description: "",
   });
 
   const formCategory = [
@@ -26,28 +22,31 @@ const CategoryPage = ({ categoryId, categoryName }) => {
     "Core",
   ];
 
-  // update my pictures for Arms
   const categoryImages = {
-    Chest:"https://i.pinimg.com/originals/d2/56/c7/d256c714b49a9a1de0084ba395f8719f.jpg",
-    Back:"https://i.pinimg.com/736x/aa/54/d7/aa54d7fea6ac490b5cb6368d1ee09929.jpg",
-    Shoulders:"https://scontent-mia3-1.xx.fbcdn.net/v/t39.30808-6/393811381_18393042871005059_8011973730059705088_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_ohc=GWHy54m3Qx0Q7kNvgF4gbIP&_nc_ht=scontent-mia3-1.xx&oh=00_AYBrSGyglpMAv00gedp6MIKOmDd2B_4UPGgLoaGvfPKqBw&oe=66917065",
+    Chest: "https://i.pinimg.com/originals/d2/56/c7/d256c714b49a9a1de0084ba395f8719f.jpg",
+    Back: "https://i.pinimg.com/736x/aa/54/d7/aa54d7fea6ac490b5cb6368d1ee09929.jpg",
+    Shoulders: "https://scontent-mia3-1.xx.fbcdn.net/v/t39.30808-6/393811381_18393042871005059_8011973730059705088_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_ohc=GWHy54m3Qx0Q7kNvgF4gbIP&_nc_ht=scontent-mia3-1.xx&oh=00_AYBrSGyglpMAv00gedp6MIKOmDd2B_4UPGgLoaGvfPKqBw&oe=66917065",
     Legs: "https://i.pinimg.com/736x/a4/6d/f6/a46df6963126efd722168e5340c005a7.jpg",
     Arms: "https://media.istockphoto.com/id/1309275239/photo/labeled-male-hamstring-muscle-group-on-skeleton.webp?b=1&s=170667a&w=0&k=20&c=BXSvX5o0GZyOteIkZjEsTPfTLkMWnibJRh4JtIYODRQ=",
-    Core:'https://i.pinimg.com/736x/d9/d3/be/d9d3be914562e19f479f413dcf3c74f5.jpg'
+    Core: 'https://i.pinimg.com/736x/d9/d3/be/d9d3be914562e19f479f413dcf3c74f5.jpg'
   };
 
   async function handleSubmit(e) {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-
-      const { data } = await axios.post(`http://localhost:5173/auth/logForm`, formData, {
+      const { data } = await axios.post(`http://localhost:8000/api/exercise/`, formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
       toast.success("Exercise created successfully!");
-      navigate("/logForm", { state: { exerciseName: formData.name } }); 
+      setFormData({
+        category: "",
+        name: "",
+        description: ""
+      });
     } catch (err) {
+      console.log(err.response.data);
       toast.error("Sorry, we have encountered an error!");
     }
   }
@@ -125,7 +124,7 @@ const CategoryPage = ({ categoryId, categoryName }) => {
                   </div>
                 </div>
                 <button className="button" type="submit">
-                  Add to Log
+                  Add Exercise
                 </button>
               </form>
             </div>

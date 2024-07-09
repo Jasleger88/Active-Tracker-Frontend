@@ -27,7 +27,7 @@ const LogForm = ({ fetchLogs }) => {
     setDate('');
     setDuration('');
     setNotes('');
-    setExercises([]);
+    setExercise('');
   };
 
   const handleSubmit = async (e) => {
@@ -37,7 +37,7 @@ const LogForm = ({ fetchLogs }) => {
     try {
       await axios.post('/api/log/', logData);
       fetchLogs();
-      handleClearForm();
+      handleClearForm(); 
       toast.success('Log added successfully');
     } catch (err) {
       console.error('Error adding log:', err);
@@ -140,6 +140,11 @@ const LogForm = ({ fetchLogs }) => {
               >
                 Delete
               </button>
+              <button
+                className="button is-small is-info is-outlined ml-2"
+                onClick={() => console.log('Edit exercise')}>
+                Edit
+              </button>
             </li>
           ))}
         </ul>
@@ -150,3 +155,4 @@ const LogForm = ({ fetchLogs }) => {
 };
 
 export default LogForm;
+
