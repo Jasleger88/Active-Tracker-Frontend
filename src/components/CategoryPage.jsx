@@ -13,6 +13,8 @@ const CategoryPage = ({ categoryId, categoryName }) => {
     description: "",
   });
 
+  const [category, setCategory] = useState('')
+
   // category (dropdown menu of categories in an array)
 
   const formCategory = [
@@ -72,9 +74,11 @@ const CategoryPage = ({ categoryId, categoryName }) => {
   // this copies the formData and updates the filed to the changed input
 
   function handleChange(e) {
-    const newFormData = { ...formData };
+    const newFormData = structuredClone(formData);
     newFormData[e.target.name] = e.target.value;
     setFormData(newFormData);
+    const categoryToChange = formData.category
+    setCategory(cat)
   }
 
 

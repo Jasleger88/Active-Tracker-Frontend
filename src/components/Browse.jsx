@@ -76,7 +76,7 @@ export default function Browse() {
     }
   }
 
-  // Render the component.
+  // Render the component/my buttons/ 
   return (
     <>
       <div className="section">

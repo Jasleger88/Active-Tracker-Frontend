@@ -34,7 +34,8 @@ const LogForm = () => {
     setDate('');
     setDuration('');
     setNotes('');
-    setExercise('');
+    setName('');
+    setExercises('');
   };
 //created a log object with the form data
 //sending post request to the apt to add to the log
