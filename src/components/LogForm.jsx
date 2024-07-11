@@ -15,7 +15,6 @@ const LogForm = () => {
   const [exercises, setExercises] = useState([]);
   const [logExercises, setLogExercises] = useState([]);
 
-  // Fetch exercises based on selected category
   useEffect(() => {
     async function fetchExercises() {
       try {
@@ -29,12 +28,12 @@ const LogForm = () => {
     fetchExercises();
   }, []);
 
-  // Filter exercises by selected category
+ 
   const filteredExercises = exercises.filter(
     (exercise) => exercise.category === parseInt(selectedCategory)
   );
 
-  // Add exercise to log
+ 
   const handleAddToLog = () => {
     const exerciseToAdd = exercises.find(
       (exercise) => exercise.id === parseInt(selectedExercise)
@@ -46,14 +45,14 @@ const LogForm = () => {
     }
   };
 
-  // Remove exercise from log
+
   const handleDeleteExercise = (index) => {
     const updatedExercises = [...logExercises];
     updatedExercises.splice(index, 1);
     setLogExercises(updatedExercises);
   };
 
-  // Handle form submission
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     const logData = { date, duration, notes, exercises: logExercises.map((exercise) => exercise.id) };

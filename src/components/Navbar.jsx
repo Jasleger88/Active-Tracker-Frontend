@@ -30,8 +30,8 @@ const Navbar = () => {
             {isLoggedIn && <Link to="/auth/logForm" className="button is-warning">Create Personalized Log</Link>}
             {isLoggedIn &&<Link to="/auth/exercise" className="button is-warning">Work on this page Jazz</Link>}
             {isLoggedIn && <Link to="/saveLog" className="button is-warning">Saved Logs</Link>}
-            {isLoggedIn && <Link to="/timerComponent" className="button is-warning">Interval Training Timer</Link>}
-            {isLoggedIn &&<button className="button" onClick={logout}>Logout</button>}
+            {isLoggedIn && <Link to="/timerComponent" className="button is-warning">Interval Timer</Link>}
+            {isLoggedIn &&<button className="button is-warning" onClick={logout}>Logout</button>}
         </div>
     );
 };

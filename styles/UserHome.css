@@ -1,0 +1,50 @@
+ .home-container {
+    background-image: url('https://imgur.com/38525b7c-58c2-423d-b2e8-d9870c3a4be6');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgb(188, 149, 19);
+  }
+  
+  .text-box {
+    background-image: url("https://i.imgur.com/yMdE9Op.png");
+    padding: 100px;
+    border: 2px solid gold;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    max-width: 600px;
+    margin: auto;
+  }
+
+  .animated-bounce-in {
+    animation: bounceIn 8s ease-in-out;
+  }
+  
+  @keyframes bounceIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.3) translate3d(0, -2000px, 0);
+    }
+    60% {
+      opacity: 1;
+      transform: scale(1.05) translate3d(0, 30px, 0);
+    }
+    80% {
+      transform: scale(0.95) translate3d(0, -10px, 0);
+    }
+    100% {
+      transform: scale(1) translate3d(0, 0, 0);
+    }
+  }
+  
+  .welcome {
+    animation: bounceIn 2s ease-in-out;
+    animation-delay: 1s;
+    color: #ffe8a9;
+    text-shadow: 0 0 10px rgba(225, 221, 214, 0.7);
+  }
+  

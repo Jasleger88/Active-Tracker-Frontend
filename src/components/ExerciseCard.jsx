@@ -1,5 +1,5 @@
 import React from 'react';
-// import '../../styles/ExerciseCard.css';
+
 
 const ExerciseCard = ({ exercise }) => {
   return (
