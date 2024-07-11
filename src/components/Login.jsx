@@ -26,10 +26,11 @@ export default function Login() {
       const { data } = await axios.post(`http://localhost:8000/api/auth/login/`, formData);
       toast.success(`Welcome, ${formData.email}`);
       const token = data.token;
-      console.log(token)
+
+    
 
       localStorage.setItem('token', token);
-      navigate('/')
+      navigate('/userHome')
     } catch (err) {
       toast.error('Login failed');
     }

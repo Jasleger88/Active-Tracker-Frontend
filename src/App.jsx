@@ -10,7 +10,7 @@ import CategoryPage from './components/CategoryPage';
 import LogForm from './components/LogForm';
 import SaveLog from './components/SaveLog';
 import TimerComponent from './components/UniqueTimerComponent';
-
+import UserHome from './components/UserHome'
 
 
 
@@ -20,6 +20,7 @@ function App() {
       <Navbar />
       
       <Routes>
+        <Route path="/userHome" element={<UserHome />} />   
         <Route path="/" element={<Home />} />
         <Route path="/auth/signup" element={<Signup />} />
         <Route path="/auth/login" element={<Login />} />
@@ -29,6 +30,7 @@ function App() {
         <Route path="/logForm/:id" element={<LogForm />} />
         <Route path="/saveLog" element={<SaveLog />} />
         <Route path="/timerComponent" element={<TimerComponent />} />
+
       
 
       </Routes>
