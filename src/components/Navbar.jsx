@@ -1,20 +1,33 @@
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from 'react-router-dom';
-import '../App.css'
+import { toast } from 'react-toastify'; // Assuming toast is imported from react-toastify
+import '../App.css';
 
+const Navbar = () => {
+    const location = useLocation();
+    const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('token'));
 
+    useEffect(() => {
+        setIsLoggedIn(localStorage.getItem('token'));
+    }, [location]);
 
-function Navbar() {
-    return <>
-    <div className="navbar">
-    <Link to="/" className="button is-warning">Home</Link>
-    <Link to="/auth/signup" className="button is-warning">Signup</Link>
-    <Link to="/auth/login" className="button is-warning">Login</Link>
-    <Link to="/auth/browse" className="button is-warning">Browse Exercises</Link>
-    <Link to="/auth/exercise" className="button is-warning">Create Exercises</Link>
-    <Link to="/auth/logForm" className="button is-warning">Your Personalize Log</Link>
-    <Link to="/saveLog" className="button is-warning"> Saved Logs</Link>
+    function logout() {
+        toast.success(`Thank you for visiting!`);
+        setIsLoggedIn(false);
+        localStorage.removeItem('token');
+    }
 
-    </div>
-    </>
-}
-export default Navbar
+    return (
+        <div className="navbar">
+            <Link to="/" className="button is-warning">Home</Link>
+            {!isLoggedIn && <Link to="/auth/signup" className="button is-warning">Signup</Link>}
+            {!isLoggedIn && <Link to="/auth/login" className="button is-warning">Login</Link>}
+            {isLoggedIn && <Link to="/auth/logForm" className="button is-warning">Your Personalized Log</Link>}
+            {isLoggedIn &&<Link to="/auth/exercise" className="button is-warning">Create Exercises</Link>}
+            {isLoggedIn && <Link to="/saveLog" className="button is-warning">Saved Logs</Link>}
+            {isLoggedIn &&<button className="button" onClick={logout}>Logout</button>}
+        </div>
+    );
+};
+
+export default Navbar;

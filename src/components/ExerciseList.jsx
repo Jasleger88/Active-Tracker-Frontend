@@ -4,9 +4,9 @@ import CategoryPage from './CategoryPage';
 import '../../styles/ExerciseList.css';
 
 
+
 const ExerciseList = ({ fetchingExercises }) => {
     const [exercises, setExercises] = useState([]);
-    const [filter, setFilter] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -38,18 +38,6 @@ const ExerciseList = ({ fetchingExercises }) => {
     return (
         <div className='exerciseList'>
             <CategoryPage/>
-            
-
-
-
-
-
-
-            {/* <ul>
-                {exercises.filter(exercise => !filter || exercise.name.startsWith(filter)).map(exercise => (
-                    <li key={exercise.id}>{exercise.name} - {exercise.description}</li>
-                ))}
-            </ul> */}
         </div>
     );
 };

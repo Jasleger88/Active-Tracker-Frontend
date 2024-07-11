@@ -1,67 +1,82 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import '../../styles/LogForm.css';
 import { useNavigate } from 'react-router-dom';
-
-
 
 const LogForm = () => {
   const navigate = useNavigate();
   const [date, setDate] = useState('');
   const [duration, setDuration] = useState('');
   const [notes, setNotes] = useState('');
-  const [exercise, setExercise] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedExercise, setSelectedExercise] = useState('');
   const [exercises, setExercises] = useState([]);
+  const [logExercises, setLogExercises] = useState([]);
 
-  //adds current exercise to the exercises array if it is filled
-  //resets the exercise input field afterward
+  // Fetch exercises based on selected category
+  useEffect(() => {
+    async function fetchExercises() {
+      try {
+        const response = await axios.get(`http://localhost:8000/api/exercise/`);
+        setExercises(response.data);
+      } catch (error) {
+        console.error('Error fetching exercises:', error);
+      }
+    }
 
-  const handleAddExercise = () => {
-    if (exercise.trim()) {
-      setExercises([...exercises, exercise]);
-      setExercise('');
+    fetchExercises();
+  }, []);
+
+  // Filter exercises by selected category
+  const filteredExercises = exercises.filter(
+    (exercise) => exercise.category === parseInt(selectedCategory)
+  );
+
+  // Add exercise to log
+  const handleAddToLog = () => {
+    const exerciseToAdd = exercises.find(
+      (exercise) => exercise.id === parseInt(selectedExercise)
+    );
+    if (exerciseToAdd) {
+      setLogExercises([...logExercises, exerciseToAdd]);
+      setSelectedExercise('');
+      toast.success('Exercise added to log successfully');
     }
   };
-  //removes the exercise from the array if user does not want to add it to log
+
+  // Remove exercise from log
   const handleDeleteExercise = (index) => {
-    const updatedExercises = [...exercises];
+    const updatedExercises = [...logExercises];
     updatedExercises.splice(index, 1);
-    setExercises(updatedExercises);
+    setLogExercises(updatedExercises);
   };
-  // clear the entire form based on my log details below
-  const handleClearForm = () => {
-    setDate('');
-    setDuration('');
-    setNotes('')
-    setExercises('');
-  };
-  //created a log object with the form data
-  //sending post request to the apt to add to the log
+
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const logData = { date, duration, notes, exercises };
-    console.log(logData.exercises)
+    const logData = { date, duration, notes, exercises: logExercises.map((exercise) => exercise.id) };
     try {
-      const token = localStorage.getItem('token')
-      console.log("hello")
-      const { data } = await axios.post(`http://localhost:8000/api/log/`,
-        logData, {
-        headers: { Authorization: `Bearer ${token}` }
-      })
-      navigate('/saveLog')
+      const token = localStorage.getItem('token');
+      await axios.post(`http://localhost:8000/api/log/`, logData, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      navigate('/saveLog');
       toast.success('Log added successfully');
+      setDate('');
+      setDuration('');
+      setNotes('');
+      setLogExercises([]);
     } catch (err) {
       console.error('Error adding log:', err);
       toast.error('Failed to add log');
     }
   };
-  // form to log workout details
-  //workout date, workout minutes, additional notes, and exercises input is inserted.
-  //input allows my user to add exercies when the button is clicked
-  // handlesubmit/clear form button functions added for user experience on the form . 
+
   return (
     <div className="columns">
+      <ToastContainer />
       <div className="column is-6" style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '10px' }}>
         <h2 className="title is-4">Log Form</h2>
         <form onSubmit={handleSubmit}>
@@ -101,29 +116,57 @@ const LogForm = () => {
             </div>
           </div>
           <div className="field">
-            <label className="label">Exercises</label>
+            <label className="label">Category</label>
             <div className="control">
-              <input
-                className="input"
-                type="text"
-                value={exercise}
-                onChange={(e) => setExercise(e.target.value)}
-              />
-              <button
-                className="button is-warning"
-                type="button"
-                onClick={handleAddExercise}
-              >
-                Add Exercise
-              </button>
+              <div className="select">
+                <select
+                  value={selectedCategory}
+                  onChange={(e) => {
+                    setSelectedCategory(e.target.value);
+                    setSelectedExercise(''); // Reset selected exercise when category changes
+                  }}
+                >
+                  <option value="">Select Category</option>
+                  <option value="1">Chest</option>
+                  <option value="2">Back</option>
+                  <option value="3">Shoulders</option>
+                  <option value="4">Arms</option>
+                  <option value="5">Legs</option>
+                  <option value="6">Core</option>
+                </select>
+              </div>
             </div>
           </div>
-          <div className="field is-grouped">
+          {selectedCategory && (
+            <div className="field">
+              <label className="label">Exercise</label>
+              <div className="control">
+                <div className="select">
+                  <select
+                    value={selectedExercise}
+                    onChange={(e) => setSelectedExercise(e.target.value)}
+                  >
+                    <option value="">Select Exercise</option>
+                    {filteredExercises.map((exercise) => (
+                      <option key={exercise.id} value={exercise.id}>
+                        {exercise.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <button
+                  className="button is-info ml-2"
+                  type="button"
+                  onClick={handleAddToLog}
+                >
+                  Add Exercise to Log
+                </button>
+              </div>
+            </div>
+          )}
+          <div className="field is-grouped" style={{ marginTop: '10px' }}>
             <div className="control">
-              <button
-                className="button is-success"
-                type="submit"
-              >
+              <button className="button is-success" type="submit">
                 Save Log
               </button>
             </div>
@@ -131,7 +174,14 @@ const LogForm = () => {
               <button
                 className="button is-warning is-light"
                 type="button"
-                onClick={handleClearForm}
+                onClick={() => {
+                  setDate('');
+                  setDuration('');
+                  setNotes('');
+                  setSelectedCategory('');
+                  setSelectedExercise('');
+                  setLogExercises([]);
+                }}
               >
                 Clear Form
               </button>
@@ -141,29 +191,35 @@ const LogForm = () => {
       </div>
       <div className="column is-6" style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '10px' }}>
         <h2 className="title is-4">Log Details</h2>
-        <p><strong>Date:</strong> {date}</p>
-        <p><strong>Duration:</strong> {duration} minutes</p>
-        <p><strong>Notes:</strong> {notes}</p>
-        <p><strong>Exercises:</strong></p>
-        <ul>
-          {exercises.map((ex, index) => (
-            <li key={index}>
-              {ex}
-              <button
-                className="button is-small is-danger is-outlined ml-2"
-                onClick={() => handleDeleteExercise(index)}
-              >
-                Delete
-              </button>
-              <button
-                className="button is-small is-info is-outlined ml-2"
-                onClick={() => console.log('Edit exercise')}>
-                Edit
-              </button>
-            </li>
-          ))}
-        </ul>
-        <img src="https://i.imgur.com/iQZDFUj.png" alt="Picture of working" style={{ maxWidth: '100%', marginTop: '10px' }} />
+        <p>
+          <strong>Date:</strong> {date}
+        </p>
+        <p>
+          <strong>Duration:</strong> {duration} minutes
+        </p>
+        <p>
+          <strong>Notes:</strong> {notes}
+        </p>
+        <p>
+          <strong>Exercises:</strong>
+        </p>
+        {logExercises.length > 0 ? (
+          <ul>
+            {logExercises.map((ex, index) => (
+              <li key={index}>
+                {ex.name}
+                <button
+                  className="button is-small is-danger is-outlined ml-2"
+                  onClick={() => handleDeleteExercise(index)}
+                >
+                  Delete
+                </button>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No exercises added yet</p>
+        )}
       </div>
     </div>
   );

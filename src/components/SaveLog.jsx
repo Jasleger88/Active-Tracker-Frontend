@@ -126,7 +126,7 @@ const SaveLog = () => {
                     ))}
                   </ul>
                   <div className="buttons-container">
-                    <button className="button is-info" onClick={(e) => { e.stopPropagation(); handleEditLog(log.id); }}>Edit</button>
+                    <button className="button is-warning" onClick={(e) => { e.stopPropagation(); handleEditLog(log.id); }}>Edit</button>
                     <button className="button is-danger" onClick={(e) => { e.stopPropagation(); handleDeleteLog(log.id); }}>Delete</button>
                   </div>
                 </div>
@@ -164,10 +164,10 @@ const SaveLog = () => {
               </div>
               <p className="help">Enter exercise IDs separated by commas.</p>
             </div>
-            <div className="field">
+            <div className="field-button">
               <div className="control">
-                <button className="button is-primary" type="submit">Save</button>
-                <button className="button is-secondary" type="button" onClick={handleClearEditing}>Cancel</button>
+                <button className="button is-warning is-dark" type="submit">Save</button>
+                <button className="button is-warning is-dark" type="button" onClick={handleClearEditing}>Cancel</button>
               </div>
             </div>
           </form>
@@ -178,5 +178,4 @@ const SaveLog = () => {
 };
 
 export default SaveLog;
-
 
