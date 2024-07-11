@@ -7,8 +7,6 @@
     position: relative;
     width: 100%;
     height: 300px;
-    display: flex;
-    flex-direction: column;
 }
 
 .save-log-container .card.save-log-card.is-flipped {
@@ -27,7 +25,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    word-wrap: break-word; /* This ensures long words break and wrap */
 }
 
 .save-log-container .card-content.front {
@@ -37,13 +34,11 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 10px; /* Add padding to ensure text doesn't touch the edges */
 }
 
 .save-log-container .card-content.back {
     transform: rotateY(180deg);
     padding: 20px;
-    overflow-wrap: break-word; /* This ensures long words break and wrap */
 }
 
 .save-log-container .card.save-log-card.is-flipped .card-content.front {
@@ -70,9 +65,9 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-}
-
-.field-button {
+  }
+ .field-button{
     padding: 10px;
     justify-content: space-between;
-}
+ }
+  

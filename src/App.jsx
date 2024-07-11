@@ -9,12 +9,16 @@ import ExerciseList from './components/ExerciseList';
 import CategoryPage from './components/CategoryPage';
 import LogForm from './components/LogForm';
 import SaveLog from './components/SaveLog';
+import TimerComponent from './components/UniqueTimerComponent';
+
+
 
 
 function App() {
   return (
     <Router>
       <Navbar />
+      
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/auth/signup" element={<Signup />} />
@@ -24,6 +28,9 @@ function App() {
         <Route path="/auth/logForm" element={<LogForm />} />
         <Route path="/logForm/:id" element={<LogForm />} />
         <Route path="/saveLog" element={<SaveLog />} />
+        <Route path="/timerComponent" element={<TimerComponent />} />
+      
+
       </Routes>
     </Router>
   );

@@ -30,9 +30,12 @@ const SaveLog = () => {
   const [logs, setLogs] = useState([]);
   const [editingLog, setEditingLog] = useState(null);
   const [flippedIndex, setFlippedIndex] = useState(null);
+  const [allExercises, setAllExercises] = useState([]);
+  const [selectedExercises, setSelectedExercises] = useState([]);
 
   useEffect(() => {
     fetchLogs();
+    fetchAllExercises();
   }, []);
 
   const fetchLogs = async () => {
@@ -48,9 +51,25 @@ const SaveLog = () => {
     }
   };
 
-  const handleEditLog = (logId) => {
+  const fetchAllExercises = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const { data } = await axios.get('http://localhost:8000/api/exercise/', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setAllExercises(data);
+    } catch (error) {
+      console.error('Error fetching exercises:', error);
+      toast.error('Failed to fetch exercises');
+    }
+  };
+
+  const handleEditLog = async (logId) => {
     const logToEdit = logs.find(log => log.id === logId);
-    setEditingLog(logToEdit);
+    if (logToEdit) {
+      setEditingLog(logToEdit);
+      setSelectedExercises(logToEdit.exercises);
+    }
   };
 
   const handleDeleteLog = async (logId) => {
@@ -69,36 +88,69 @@ const SaveLog = () => {
 
   const handleClearEditing = () => {
     setEditingLog(null);
+    setSelectedExercises([]);
   };
 
   const handleSaveLog = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const logData = Object.fromEntries(formData.entries());
+    logData.exercises = selectedExercises;
 
     try {
       const token = localStorage.getItem('token');
+      const config = {
+        headers: { Authorization: `Bearer ${token}` }
+      };
+
       if (editingLog) {
-        await axios.put(`http://localhost:8000/api/log/${editingLog.id}/`, logData, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        await axios.put(`http://localhost:8000/api/log/${editingLog.id}/`, logData, config);
         toast.success('Log updated successfully');
       } else {
-        await axios.post(`http://localhost:8000/api/log/`, logData, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        await axios.post(`http://localhost:8000/api/log/`, logData, config);
         toast.success('Log added successfully');
       }
+
       fetchLogs();
       handleClearEditing();
     } catch (error) {
-      console.error('Error saving log:', error);
-      toast.error('Failed to save log');
+      handleApiError(error);
     }
+  };
+
+  const handleApiError = (error) => {
+    if (error.response) {
+      if (error.response.status === 401) {
+        toast.error('Unauthorized. Please login again.');
+      } else {
+        toast.error('Failed to save log. Please try again.');
+      }
+    } else if (error.request) {
+      toast.error('No response from server. Please try again.');
+    } else {
+      toast.error('Error saving log. Please try again.');
+    }
+    console.error('Error:', error);
   };
 
   const handleCardClick = (index) => {
     setFlippedIndex(flippedIndex === index ? null : index);
+  };
+
+  const setSelectedExercise = (index, e) => {
+    const newSelectedExercises = [...selectedExercises];
+    newSelectedExercises[index] = parseInt(e.target.value, 10);
+    setSelectedExercises(newSelectedExercises);
+  };
+
+  const addExercise = () => {
+    setSelectedExercises([...selectedExercises, ""]);
+  };
+
+  const removeExercise = (index) => {
+    const newSelectedExercises = [...selectedExercises];
+    newSelectedExercises.splice(index, 1);
+    setSelectedExercises(newSelectedExercises);
   };
 
   return (
@@ -160,9 +212,26 @@ const SaveLog = () => {
             <div className="field">
               <label className="label">Exercises</label>
               <div className="control">
-                <input className="input" type="text" name="exercises" defaultValue={editingLog.exercises.join(',')} required />
+                {selectedExercises.map((selectedValue, index) => (
+                  <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+                    <select
+                      value={selectedValue}
+                      onChange={(e) => setSelectedExercise(index, e)}
+                    >
+                      <option value="">Select Exercise</option>
+                      {allExercises.map((exercise) => (
+                        <option key={exercise.id} value={exercise.id}>
+                          {exercise.name}
+                        </option>
+                      ))}
+                    </select>
+                    <button onClick={() => removeExercise(index)} style={{ marginLeft: '10px' }}>
+                      Remove
+                    </button>
+                  </div>
+                ))}
+                <button type="button" onClick={addExercise}>Add Exercise</button>
               </div>
-              <p className="help">Enter exercise IDs separated by commas.</p>
             </div>
             <div className="field-button">
               <div className="control">
@@ -178,4 +247,8 @@ const SaveLog = () => {
 };
 
 export default SaveLog;
+
+
+
+
 

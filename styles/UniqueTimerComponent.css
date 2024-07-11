@@ -1,0 +1,94 @@
+#unique-timer-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+#unique-timer-input-hours, #unique-timer-input-minutes, #unique-timer-input-seconds {
+  margin-bottom: 10px;
+}
+
+#unique-timer-input-hours label, #unique-timer-input-minutes label, #unique-timer-input-seconds label {
+  margin-right: 10px;
+}
+
+#unique-timer-input-hours input, #unique-timer-input-minutes input, #unique-timer-input-seconds input {
+  width: 50px;
+  padding: 5px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+#unique-timer-controls {
+  margin-bottom: 20px;
+}
+
+#unique-timer-controls button {
+  margin-right: 10px;
+  padding: 10px 20px;
+  background-color: #e7c55e;
+  color: rgb(119, 33, 33);
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+#unique-timer-controls button:hover {
+  background-color: #b9bb7d;
+}
+
+#unique-timer-display {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  margin: 0 auto;
+  color: rgb(23, 20, 20);
+  font-size: 48px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #d9b122;
+  border-radius: 50%;
+  border: 5px solid #007bff;
+}
+
+#unique-timer-display svg.unique-timer-svg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+#unique-timer-display circle.unique-timer-circle {
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  stroke: #007bff;
+  stroke-width: 10px;
+  stroke-linecap: round;
+}
+
+#unique-timer-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+}
+
+#unique-timer-intro {
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: rgb(181, 129, 38);
+  padding: 20px;
+  margin-top: 20px;
+}
+
+#unique-timer-intro p {
+  color: rgb(181, 129, 38);
+  padding: 50px;
+  font-size: 20px;
+  margin-top: 20px;
+}

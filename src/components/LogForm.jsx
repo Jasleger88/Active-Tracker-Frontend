@@ -123,7 +123,7 @@ const LogForm = () => {
                   value={selectedCategory}
                   onChange={(e) => {
                     setSelectedCategory(e.target.value);
-                    setSelectedExercise(''); // Reset selected exercise when category changes
+                    setSelectedExercise(''); 
                   }}
                 >
                   <option value="">Select Category</option>
