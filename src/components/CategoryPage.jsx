@@ -91,7 +91,6 @@ const CategoryPage = () => {
         description: ""
       });
 
-      // Navigate to appropriate page after form submission
       navigate('/saveLog');
     } catch (err) {
       console.log(err.response.data);
@@ -174,11 +173,6 @@ const CategoryPage = () => {
                   </div>
                 </div>
                 {selectedCategory && displayExercisesDropdown(selectedCategory)}
-                {/* <div className="field">
-                  <div className="control">
-                    <button type="submit" className="button is-primary">Save Exercise</button>
-                  </div>
-                </div> */}
               </form>
             </div>
           </div>

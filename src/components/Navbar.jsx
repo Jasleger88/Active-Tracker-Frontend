@@ -28,10 +28,9 @@ const Navbar = () => {
             {!isLoggedIn && <Link to="/auth/login" className="button is-warning">Welcome back! Please log in</Link>}
             {isLoggedIn && <Link to="/userHome" className="button is-warning"> Home</Link>}
             {isLoggedIn && <Link to="/auth/logForm" className="button is-warning">Create Personalized Log</Link>}
-            {isLoggedIn &&<Link to="/auth/exercise" className="button is-warning">Work on this page Jazz</Link>}
             {isLoggedIn && <Link to="/saveLog" className="button is-warning">Saved Logs</Link>}
             {isLoggedIn && <Link to="/timerComponent" className="button is-warning">Interval Timer</Link>}
-            {isLoggedIn &&<button className="button is-warning" onClick={logout}>Logout</button>}
+            {isLoggedIn && <button className="button is-warning" onClick={logout}>Logout</button>}
         </div>
     );
 };

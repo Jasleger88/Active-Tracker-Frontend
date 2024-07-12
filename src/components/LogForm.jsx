@@ -126,10 +126,10 @@ const LogForm = () => {
                   }}
                 >
                   <option value="">Select Category</option>
-                  <option value="1">Chest</option>
-                  <option value="2">Back</option>
-                  <option value="3">Shoulders</option>
-                  <option value="4">Arms</option>
+                  <option value="1">Arms</option>
+                  <option value="2">Shoulders</option>
+                  <option value="3">Chest</option>
+                  <option value="4">Back</option>
                   <option value="5">Legs</option>
                   <option value="6">Core</option>
                 </select>
