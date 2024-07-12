@@ -4,6 +4,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../../styles/LogForm.css';
 import { useNavigate } from 'react-router-dom';
+import { baseUrl } from '../config';
 
 const LogForm = () => {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ const LogForm = () => {
   useEffect(() => {
     async function fetchExercises() {
       try {
-        const response = await axios.get(`http://localhost:8000/api/exercise/`);
+        const response = await axios.get(`${baseUrl}/exercise/`);
         setExercises(response.data);
       } catch (error) {
         console.error('Error fetching exercises:', error);
@@ -58,7 +59,7 @@ const LogForm = () => {
     const logData = { date, duration, notes, exercises: logExercises.map((exercise) => exercise.id) };
     try {
       const token = localStorage.getItem('token');
-      await axios.post(`http://localhost:8000/api/log/`, logData, {
+      await axios.post(`${baseUrl}/log/`, logData, {
         headers: { Authorization: `Bearer ${token}` },
       });
       navigate('/saveLog');

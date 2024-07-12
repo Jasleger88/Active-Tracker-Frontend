@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import CategoryPage from './CategoryPage';
 import '../../styles/ExerciseList.css';
+import { baseUrl } from '../config';
 
 
 
@@ -17,7 +18,7 @@ const ExerciseList = ({ fetchingExercises }) => {
     const fetchExercises = async () => {
         setLoading(true);
         try {
-            const response = await axios.get('/api/exercise');
+            const response = await axios.get(`${baseUrl}/exercise`);
             setExercises(response.data);
             setLoading(false);
         } catch (err) {

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import '../../styles/SaveLog.css';
+import { baseUrl } from '../config';
 
 const AsyncExerciseName = ({ exerciseId }) => {
   const [exerciseName, setExerciseName] = useState('');
@@ -13,7 +14,7 @@ const AsyncExerciseName = ({ exerciseId }) => {
   const fetchExerciseName = async () => {
     try {
       const token = localStorage.getItem('token');
-      const { data } = await axios.get(`http://localhost:8000/api/exercise/${exerciseId}/`, {
+      const { data } = await axios.get(`${baseUrl}exercise/${exerciseId}/`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setExerciseName(data.name);
@@ -41,7 +42,7 @@ const SaveLog = () => {
   const fetchLogs = async () => {
     try {
       const token = localStorage.getItem('token');
-      const { data } = await axios.get(`http://localhost:8000/api/log/`, {
+      const { data } = await axios.get(`${baseUrl}/log/`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setLogs(data);
@@ -54,7 +55,7 @@ const SaveLog = () => {
   const fetchAllExercises = async () => {
     try {
       const token = localStorage.getItem('token');
-      const { data } = await axios.get('http://localhost:8000/api/exercise/', {
+      const { data } = await axios.get(`${baseUrl}/exercise/`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setAllExercises(data);
@@ -75,7 +76,7 @@ const SaveLog = () => {
   const handleDeleteLog = async (logId) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:8000/api/log/${logId}/`, {
+      await axios.delete(`${baseUrl}/log/${logId}/`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       toast.success('Log deleted successfully');
@@ -104,10 +105,10 @@ const SaveLog = () => {
       };
 
       if (editingLog) {
-        await axios.put(`http://localhost:8000/api/log/${editingLog.id}/`, logData, config);
+        await axios.put(`${baseUrl}/log/${editingLog.id}/`, logData, config);
         toast.success('Log updated successfully');
       } else {
-        await axios.post(`http://localhost:8000/api/log/`, logData, config);
+        await axios.post(`${baseUrl}/log/`, logData, config);
         toast.success('Log added successfully');
       }
 

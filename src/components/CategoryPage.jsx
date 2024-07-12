@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import '../../styles/CategoryPage.css';
+import { baseUrl } from '../config';
 
 const CategoryPage = () => {
   const navigate = useNavigate();
@@ -80,7 +81,7 @@ const CategoryPage = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      const { data } = await axios.post(`http://localhost:8000/api/exercise/`, formData, {
+      const { data } = await axios.post(`${baseUrl}/exercise/`, formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
