@@ -24,7 +24,7 @@ export default function Login() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const { data } = await axios.post(`${baseUrl}/login/`, formData);
+      const { data } = await axios.post(`${baseUrl}/auth/login/`, formData);
       toast.success(`Welcome, ${formData.email}`);
       const token = data.token;
 
@@ -33,6 +33,7 @@ export default function Login() {
       localStorage.setItem('token', token);
       navigate('/userHome')
     } catch (err) {
+      console.log(err);
       toast.error('Login failed');
     }
   }

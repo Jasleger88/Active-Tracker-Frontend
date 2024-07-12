@@ -31,7 +31,7 @@ export default function Signup() {
         e.preventDefault();
         try {
             console.log(formData)
-            await axios.post(`${baseUrl}/register/`, formData);
+            await axios.post(`${baseUrl}/auth/register/`, formData);
             toast.success('Registration successful');
             navigate('/');
             
