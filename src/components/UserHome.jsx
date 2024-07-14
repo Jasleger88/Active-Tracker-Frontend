@@ -9,7 +9,7 @@ const UserHome = () => {
           <div className="container has-text-centered">
             <div className="text-box">
               <h1 id="home-page-header" className="title is-1 has-text-weight-bold animated-bounce-in">
-                ACTIVE-TRACKER
+                ACTIVE TRACKER
               </h1>
               <h2 className="welcome animated-bounce-in">Welcome to Active-Tracker</h2>
             </div>

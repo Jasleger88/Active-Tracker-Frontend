@@ -77,7 +77,7 @@ const LogForm = () => {
   return (
     <div className="columns">
       <ToastContainer />
-      <div className="column is-6" style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '10px' }}>
+      <div className="column is-6" style={{ border: '1px solid #ccc', padding: '50px', borderRadius: '20px' }}>
         <h2 className="title is-4">Log Form</h2>
         <form onSubmit={handleSubmit}>
           <div className="field">

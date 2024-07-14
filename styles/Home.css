@@ -5,11 +5,12 @@
   background-position: center;
   background-repeat: no-repeat;
   color: white; 
+  box-shadow: ;
 }
 
 #home-page-header {
   font-weight: bold;
-  color:rgb(179, 161, 82);
+  color:rgb(242, 240, 233);
   font-family: Georgia, 'Times New Roman', Times, serif;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   transform: skew(-10deg);

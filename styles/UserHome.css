@@ -8,6 +8,7 @@
     justify-content: center;
     align-items: center;
     color: rgb(188, 149, 19);
+    padding-top: 20px;
   }
   
   .text-box {
@@ -44,7 +45,8 @@
   .welcome {
     animation: bounceIn 2s ease-in-out;
     animation-delay: 1s;
-    color: #ffe8a9;
+    color: #d7d6d2;
     text-shadow: 0 0 10px rgba(225, 221, 214, 0.7);
+    font-size: 25px;
   }
   

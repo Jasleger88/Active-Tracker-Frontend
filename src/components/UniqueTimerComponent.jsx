@@ -55,7 +55,7 @@ const UniqueTimerComponent = () => {
 
   return (
     <div className="unique-timer-container" id="unique-timer-container">
-      <p id="unique-timer-intro">Start interval training Now with a timer!</p>
+      <p id="unique-timer-intro">Start Now with a timer!</p>
       <div className="unique-timer-input" id="unique-timer-input-hours">
         <label>Hours:</label>
         <input type="number" value={hours} onChange={(e) => setHours(parseInt(e.target.value, 10))} />

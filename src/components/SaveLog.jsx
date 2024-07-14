@@ -14,13 +14,13 @@ const AsyncExerciseName = ({ exerciseId }) => {
   const fetchExerciseName = async () => {
     try {
       const token = localStorage.getItem('token');
-      const { data } = await axios.get(`${baseUrl}exercise/${exerciseId}/`, {
+      const { data } = await axios.get(`${baseUrl}/exercise/${exerciseId}/`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setExerciseName(data.name);
     } catch (error) {
       console.error(`Error fetching exercise name for ID ${exerciseId}:`, error);
-      setExerciseName(`Exercise ID ${exerciseId}`);
+      setExerciseName(`Exercise ID ${exerciseName}`);
     }
   };
 
@@ -248,8 +248,3 @@ const SaveLog = () => {
 };
 
 export default SaveLog;
-
-
-
-
-

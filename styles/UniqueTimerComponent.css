@@ -3,6 +3,24 @@
   margin: 0 auto;
   padding: 20px;
   text-align: center;
+  position: relative;
+  z-index: 1;
+  color: white; 
+}
+
+#unique-timer-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://images.unsplash.com/photo-1591207405010-1bf742ac5184?q=80&w=1214&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.5; 
+  z-index: -1;
 }
 
 #unique-timer-input-hours, #unique-timer-input-minutes, #unique-timer-input-seconds {
