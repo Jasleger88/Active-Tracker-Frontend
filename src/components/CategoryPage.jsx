@@ -149,18 +149,18 @@ const CategoryPage = () => {
       const exercise = category.exercises.find(ex => ex.name === exerciseName);
       if (exercise) {
         return (
-          <div className="columns is-centered">
-            <div className="column is-half">
-              <div className="card">
-                <div className="card-image">
-                  <figure className="image is-4by3">
-                    <img src={exercise.image} alt={exercise.name} />
+          <div className="columns is-centered" id="exercise-image-columns">
+            <div className="column is-half" id="exercise-image-column">
+              <div className="card" id="exercise-image-card">
+                <div className="card-image" id="exercise-card-image">
+                  <figure className="image is-4by3" id="exercise-figure">
+                    <img src={exercise.image} alt={exercise.name} id="exercise-img" />
                   </figure>
                 </div>
-                <div className="card-content">
-                  <div className="content">
-                    <p className="title is-4">{exercise.name}</p>
-                    <p>{exercise.description}</p>
+                <div className="card-content" id="exercise-card-content">
+                  <div className="content" id="exercise-content">
+                    <p className="title is-4" id="exercise-title">{exercise.name}</p>
+                    <p id="exercise-description">{exercise.description}</p>
                   </div>
                 </div>
               </div>
@@ -171,22 +171,23 @@ const CategoryPage = () => {
     }
     return null;
   }
-
+  
   return (
-    <div className="section category-page">
-      <div className="columns">
-        <div className="column is-half">
+    <div className="section category-page" id="category-page">
+      <div className="columns" id="category-columns">
+      
           {selectedCategory && !selectedExercise && displayMuscleGroupImage(selectedCategory)}
-        </div>
-        <div className="column is-half">
-          <div className="section">
-            <div className="container">
-              <form onSubmit={handleSubmit}>
-                <div className="field">
-                  <label className="label">Select Category</label>
-                  <div className="control">
+       
+        <div className="column is-half" id="category-column-right">
+          <div className="section" id="category-section">
+            <div className="container" id="category-container">
+              <form onSubmit={handleSubmit} id="category-form">
+                <div className="field" id="category-dropdown-field">
+                  <label className="label" id="category-dropdown-label">Select Category</label>
+                  <div className="control" id="category-dropdown-control">
                     <select
                       className="input"
+                      id="category-dropdown-select"
                       name="category"
                       onChange={(e) => {
                         setSelectedCategory(e.target.value);
@@ -213,5 +214,5 @@ const CategoryPage = () => {
     </div>
   );
 }
-
-export default CategoryPage;
+  
+  export default CategoryPage;
