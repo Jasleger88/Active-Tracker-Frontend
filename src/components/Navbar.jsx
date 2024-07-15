@@ -31,6 +31,8 @@ const Navbar = () => {
             {isLoggedIn && <Link to="/saveLog" className="button is-warning">Saved Logs</Link>}
             {isLoggedIn && <Link to="/timerComponent" className="button is-warning">Interval Timer</Link>}
             {isLoggedIn && <button className="button is-warning" onClick={logout}>Logout</button>}
+            {isLoggedIn && <Link to="/category-page" className="button is-warning">Exercise Directory</Link>}
+            
         </div>
     );
 };
