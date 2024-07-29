@@ -1,5 +1,5 @@
 # Active Tracker
-  add image here
+![Active Tracker HomePage](Images/mainpage.png)
 
   ## Link to Active Tracker
 
@@ -12,7 +12,9 @@
   The inspiration for Active Tracker came from the desire to create a user-friendly platform where fitness enthusiasts can keep track of their workouts, visualize their progress, and stay motivated. The idea was to combine the functionality of exercise tracking with engaging visuals and an intuitive interface.
 
   ## Planning Process
-   add image here
+  ![Active Tracker HomePage](Images/Planningprocess.png)
+
+  ![Active Tracker HomePage](Images/Planningprocess2.png)
 
 
 ## Features
@@ -25,6 +27,10 @@
 7. Saved Logs: Access old logs to track and review fitness progress.
 8. Toast Notifications: Feedback on successful or failed operations.
 9. Responsive Design: A user-friendly interface that adapts to different screen sizes.
+
+![Active Tracker HomePage](Images/IntervalTimer.png)
+
+![Active Tracker HomePage](Images/ExerciseLog.png)
 
 ## Deployment
 
