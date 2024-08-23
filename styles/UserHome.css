@@ -1,5 +1,4 @@
  .home-container {
-    background-image: url('https://imgur.com/38525b7c-58c2-423d-b2e8-d9870c3a4be6');
     background-size: cover;
     background-position: center;
     height: 100vh;
@@ -14,7 +13,7 @@
   .text-box {
     background-image: url("https://i.imgur.com/yMdE9Op.png");
     padding: 100px;
-    border: 2px solid gold;
+    border: 5px solid gold;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     max-width: 600px;
@@ -22,7 +21,7 @@
   }
 
   .animated-bounce-in {
-    animation: bounceIn 8s ease-in-out;
+    animation: bounceIn 3s ease-in-out;
   }
   
   @keyframes bounceIn {
@@ -43,7 +42,7 @@
   }
   
   .welcome {
-    animation: bounceIn 2s ease-in-out;
+    animation: bounceIn 3s ease-in-out;
     animation-delay: 1s;
     color: #d7d6d2;
     text-shadow: 0 0 10px rgba(225, 221, 214, 0.7);
